@@ -1,87 +1,150 @@
 "use client"
 
 import { useState } from 'react'
-import { Menu, X, Clock, MapPin, Phone, Mail, ChevronRight, Star, Users, Flame, Wine, Calendar, ChefHat, Heart, Utensils, Pizza, Leaf, ArrowRight, Facebook, Instagram, Twitter } from 'lucide-react'
+import { Menu, X, Phone, Mail, MapPin, Clock, ChefHat, Utensils, Wine, Users, Calendar, Star, ArrowRight, Leaf, Flame, Heart, Instagram, Facebook, Twitter } from 'lucide-react'
 
 const colors = {
-  terracotta: '#C4704F',
-  cream: '#F5EBE0',
-  olive: '#6B7B4C',
-  espresso: '#3D2E2A',
-  taupe: '#A89B8C'
+  terracotta: '#D4A574',
+  cream: '#FAF6F1',
+  olive: '#6B7B3C',
+  espresso: '#3D2B1F',
+  walnut: '#8B7355'
 }
 
 const navLinks = [
-  { name: 'Inicio', href: '#hero' },
-  { name: 'Nuestra Historia', href: '#about' },
-  { name: 'Menú', href: '#menu' },
-  { name: 'Especialidades', href: '#specials' },
-  { name: 'Galería', href: '#gallery' },
-  { name: 'Reservaciones', href: '#booking' },
-  { name: 'Contacto', href: '#contact' }
+  { name: 'Inicio', href: '#inicio' },
+  { name: 'Nuestra Historia', href: '#historia' },
+  { name: 'Carta', href: '#carta' },
+  { name: 'Especialidades', href: '#especialidades' },
+  { name: 'Galería', href: '#galeria' },
+  { name: 'Reservas', href: '#reservas' },
+  { name: 'Contacto', href: '#contacto' }
 ]
 
 const menuCategories = [
-  { name: 'Antipasti', icon: Leaf, description: 'Entrantes tradicionales italianos' },
-  { name: 'Pasta Fresca', icon: Utensils, description: 'Hecha a mano cada día' },
-  { name: 'Pizza Napolitana', icon: Pizza, description: 'Horno de leña auténtico' },
-  { name: 'Secondi', icon: Flame, description: 'Carnes y pescados selectos' },
-  { name: 'Dolci', icon: Heart, description: 'Postres de la casa' },
-  { name: 'Vini', icon: Wine, description: 'Selección de vinos italianos' }
+  {
+    name: 'Antipasti',
+    icon: Leaf,
+    description: 'Entrantes tradicionales para abrir el apetito',
+    items: ['Bruschetta al Pomodoro', 'Carpaccio di Manzo', 'Burrata con Prosciutto', 'Calamari Fritti']
+  },
+  {
+    name: 'Pasta Fresca',
+    icon: ChefHat,
+    description: 'Elaborada diariamente a mano con recetas familiares',
+    items: ['Tagliatelle al Ragù', 'Ravioli di Ricotta', 'Pappardelle ai Funghi', 'Spaghetti alle Vongole']
+  },
+  {
+    name: 'Pizza Napolitana',
+    icon: Flame,
+    description: 'Horneada en horno de leña a más de 400 grados',
+    items: ['Margherita DOP', 'Quattro Formaggi', 'Diavola', 'Napoli con Anchoas']
+  },
+  {
+    name: 'Secondi Piatti',
+    icon: Utensils,
+    description: 'Carnes y pescados de primera calidad',
+    items: ['Ossobuco alla Milanese', 'Saltimbocca alla Romana', 'Branzino al Forno', 'Pollo alla Parmigiana']
+  },
+  {
+    name: 'Dolci',
+    icon: Heart,
+    description: 'Postres caseros para un final perfecto',
+    items: ['Tiramisù della Nonna', 'Panna Cotta', 'Cannoli Siciliani', 'Affogato al Caffè']
+  },
+  {
+    name: 'Vinos',
+    icon: Wine,
+    description: 'Selección de las mejores regiones italianas',
+    items: ['Chianti Classico', 'Barolo', 'Prosecco', 'Amarone della Valpolicella']
+  }
 ]
 
 const featuredDishes = [
-  { name: 'Tagliatelle al Tartufo', category: 'Pasta Fresca', description: 'Pasta fresca cortada a mano con trufa negra de temporada, mantequilla dorada y parmigiano reggiano 24 meses' },
-  { name: 'Pizza Margherita DOC', category: 'Pizza Napolitana', description: 'Tomate San Marzano DOP, mozzarella di bufala campana, albahaca fresca y aceite de oliva virgen extra' },
-  { name: 'Ossobuco alla Milanese', category: 'Secondi', description: 'Jarrete de ternera braseado lentamente con gremolata de limón, servido con risotto azafrán' },
-  { name: 'Tiramisù della Nonna', category: 'Dolci', description: 'Receta familiar de tres generaciones con mascarpone artesanal y café espresso italiano' }
-]
-
-const timelineEvents = [
-  { year: '1987', title: 'El Comienzo', description: 'La familia abre las puertas de Trattoria Napoli con las recetas de la abuela napolitana' },
-  { year: '1995', title: 'El Horno de Leña', description: 'Instalamos nuestro horno napolitano tradicional, importado directamente de Italia' },
-  { year: '2005', title: 'Segunda Generación', description: 'Los hijos toman las riendas, manteniendo viva la tradición familiar' },
-  { year: '2015', title: 'Reconocimiento', description: 'Reconocidos como referente de la auténtica cocina italiana en la ciudad' },
-  { year: '2024', title: 'Tradición Viva', description: 'Más de 35 años compartiendo la pasión por la cocina italiana auténtica' }
-]
-
-const testimonials = [
-  { text: 'La pasta más auténtica que he probado fuera de Italia. Cada bocado me transporta a la casa de mi abuela en Nápoles.', role: 'Cliente desde 2010' },
-  { text: 'El ambiente es mágico, como entrar en una verdadera trattoria romana. La pizza es simplemente perfecta.', role: 'Crítico gastronómico' },
-  { text: 'Celebramos todas nuestras ocasiones especiales aquí. El servicio es impecable y la comida, extraordinaria.', role: 'Cliente frecuente' },
-  { text: 'Los mejores antipasti de la ciudad. El carpaccio de pulpo es una obra de arte culinaria.', role: 'Chef profesional' }
+  {
+    name: 'Tagliatelle al Tartufo Nero',
+    description: 'Pasta fresca con trufa negra de temporada, mantequilla de granja y parmigiano reggiano 24 meses',
+    tag: 'Especialidad de la Casa'
+  },
+  {
+    name: 'Pizza Margherita DOP',
+    description: 'Masa madre de 72 horas, tomate San Marzano, mozzarella di bufala campana y albahaca fresca',
+    tag: 'Receta Original'
+  },
+  {
+    name: 'Ossobuco alla Milanese',
+    description: 'Jarrete de ternera braseado lentamente con gremolata, servido con risotto allo zafferano',
+    tag: 'Plato Tradicional'
+  },
+  {
+    name: 'Tiramisù della Nonna',
+    description: 'Receta familiar desde 1987, con mascarpone artesanal, café espresso y cacao puro',
+    tag: 'Postre Estrella'
+  }
 ]
 
 const galleryItems = [
-  { title: 'Pasta Artesanal', category: 'Cocina' },
-  { title: 'Nuestro Horno', category: 'Tradición' },
-  { title: 'Ingredientes Frescos', category: 'Calidad' },
-  { title: 'Ambiente Íntimo', category: 'Espacio' },
-  { title: 'Pizza Napolitana', category: 'Especialidad' },
-  { title: 'Mesa Familiar', category: 'Experiencia' },
-  { title: 'Vinos Selectos', category: 'Carta' },
-  { title: 'Postres Caseros', category: 'Dolci' }
+  { title: 'Pasta Fresca del Día', aspect: 'tall' },
+  { title: 'Pizza Margherita', aspect: 'wide' },
+  { title: 'Interior del Restaurante', aspect: 'square' },
+  { title: 'Tiramisù Artesanal', aspect: 'square' },
+  { title: 'Cocina en Acción', aspect: 'tall' },
+  { title: 'Mesa Familiar', aspect: 'wide' }
 ]
 
 const processSteps = [
-  { step: '01', title: 'Ingredientes Selectos', description: 'Importamos directamente de Italia: tomates San Marzano, mozzarella di bufala, aceite de oliva toscano y más' },
-  { step: '02', title: 'Preparación Artesanal', description: 'Nuestra pasta se amasa y corta a mano cada mañana, siguiendo las técnicas tradicionales napolitanas' },
-  { step: '03', title: 'Cocción Perfecta', description: 'Horno de leña a 450°C para pizzas, brasas lentas para estofados, todo en su punto exacto' },
-  { step: '04', title: 'Servicio con Alma', description: 'Cada plato se presenta con el cariño y la atención que merece nuestra tradición familiar' }
+  {
+    step: '01',
+    title: 'Ingredientes Frescos',
+    description: 'Cada mañana recibimos productos frescos de proveedores locales y directamente importados de Italia'
+  },
+  {
+    step: '02',
+    title: 'Elaboración Artesanal',
+    description: 'Nuestra pasta se amasa a mano cada día siguiendo las técnicas transmitidas por tres generaciones'
+  },
+  {
+    step: '03',
+    title: 'Cocción Perfecta',
+    description: 'Horno de leña para pizzas y cocción lenta para ragús, respetando los tiempos tradicionales'
+  },
+  {
+    step: '04',
+    title: 'Servicio con Amor',
+    description: 'Cada plato se presenta con el cariño y la dedicación que merece nuestra tradición familiar'
+  }
+]
+
+const testimonials = [
+  {
+    text: 'La mejor pasta fresca que he probado fuera de Italia. El ambiente te transporta directamente a una trattoria napolitana.',
+    author: 'Cliente desde 2005',
+    rating: 5
+  },
+  {
+    text: 'Llevamos celebrando nuestros aniversarios aquí desde hace 15 años. La calidad y el servicio son siempre impecables.',
+    author: 'Familia habitual',
+    rating: 5
+  },
+  {
+    text: 'El tiramisù de la nonna es simplemente espectacular. Una receta que se nota que viene del corazón.',
+    author: 'Amante de la cocina italiana',
+    rating: 5
+  }
+]
+
+const timelineEvents = [
+  { year: '1987', title: 'Apertura', description: 'Una familia napolitana abre las puertas de su sueño' },
+  { year: '1995', title: 'Horno de Leña', description: 'Instalamos nuestro primer horno tradicional importado de Nápoles' },
+  { year: '2005', title: 'Segunda Generación', description: 'Los hijos toman el relevo manteniendo las recetas originales' },
+  { year: '2015', title: 'Reconocimiento', description: 'Reconocidos como referente de la cocina italiana auténtica' },
+  { year: 'Hoy', title: 'Tradición Viva', description: 'Seguimos elaborando cada plato con la misma pasión del primer día' }
 ]
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState('Todos')
-
-  const nextTestimonial = () => {
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
-  }
-
-  const prevTestimonial = () => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+  const [activeCategory, setActiveCategory] = useState(0)
 
   return (
     <main style={{ backgroundColor: colors.cream, color: colors.espresso }}>
@@ -89,31 +152,30 @@ export default function HomePage() {
       <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={{ backgroundColor: `${colors.cream}f0`, backdropFilter: 'blur(10px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <a href="#hero" className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.terracotta }}>
-                <ChefHat className="w-6 h-6" style={{ color: colors.cream }} />
-              </div>
-              <div>
-                <span className="font-serif text-xl font-bold tracking-wide" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>Trattoria Napoli</span>
-                <p className="text-xs tracking-widest uppercase" style={{ color: colors.taupe }}>Dal 1987</p>
-              </div>
+            <a href="#inicio" className="flex flex-col">
+              <span className="font-serif text-2xl tracking-wide" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>
+                Trattoria Napoli
+              </span>
+              <span className="text-xs tracking-widest uppercase" style={{ color: colors.walnut }}>
+                Dal 1987
+              </span>
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm font-medium tracking-wide hover:opacity-70 transition-opacity"
+                  className="text-sm tracking-wide hover:opacity-70 transition-opacity"
                   style={{ fontFamily: 'Source Sans Pro, sans-serif', color: colors.espresso }}
                 >
                   {link.name}
                 </a>
               ))}
               <a
-                href="#booking"
-                className="px-6 py-3 text-sm font-semibold tracking-wide transition-all hover:scale-105"
+                href="#reservas"
+                className="px-6 py-3 text-sm tracking-wide transition-all hover:scale-105"
                 style={{ backgroundColor: colors.terracotta, color: colors.cream, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
                 Reservar Mesa
@@ -122,20 +184,16 @@ export default function HomePage() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6" style={{ color: colors.espresso }} />
-              ) : (
-                <Menu className="w-6 h-6" style={{ color: colors.espresso }} />
-              )}
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ${mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
           style={{ backgroundColor: colors.cream }}
@@ -145,18 +203,18 @@ export default function HomePage() {
               <a
                 key={link.name}
                 href={link.href}
+                className="block py-3 text-lg border-b transition-colors"
+                style={{ borderColor: `${colors.terracotta}30`, fontFamily: 'Source Sans Pro, sans-serif' }}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-3 text-lg font-medium border-b"
-                style={{ borderColor: `${colors.taupe}30`, color: colors.espresso }}
               >
                 {link.name}
               </a>
             ))}
             <a
-              href="#booking"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-center py-4 mt-4 font-semibold"
+              href="#reservas"
+              className="block text-center py-4 mt-4"
               style={{ backgroundColor: colors.terracotta, color: colors.cream }}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Reservar Mesa
             </a>
@@ -165,149 +223,136 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background with gradient overlay */}
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(135deg, ${colors.espresso} 0%, ${colors.terracotta}90 50%, ${colors.olive}80 100%)`
+            background: `linear-gradient(135deg, ${colors.espresso} 0%, ${colors.walnut} 50%, ${colors.terracotta} 100%)`
           }}
         />
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `radial-gradient(circle at 20% 80%, ${colors.terracotta} 0%, transparent 50%), radial-gradient(circle at 80% 20%, ${colors.olive} 0%, transparent 50%)`
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FAF6F1' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
           }}
         />
         
-        {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 opacity-10" style={{ border: `2px solid ${colors.cream}`, borderRadius: '50%' }} />
-        <div className="absolute bottom-32 right-20 w-48 h-48 opacity-10" style={{ border: `2px solid ${colors.cream}`, borderRadius: '50%' }} />
-        
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <p className="text-sm md:text-base tracking-[0.3em] uppercase mb-6" style={{ color: `${colors.cream}cc`, fontFamily: 'Source Sans Pro, sans-serif' }}>
+          <p
+            className="text-sm md:text-base tracking-[0.3em] uppercase mb-6"
+            style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+          >
             Auténtica Cocina Italiana desde 1987
           </p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight" style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}>
-            Trattoria<br />
-            <span style={{ color: colors.terracotta, textShadow: `2px 2px 0 ${colors.cream}30` }}>Napoli</span>
+          <h1
+            className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight"
+            style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
+          >
+            Trattoria Napoli
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" style={{ color: `${colors.cream}dd`, fontFamily: 'Source Sans Pro, sans-serif' }}>
-            Donde la tradición familiar se encuentra con la pasión por la auténtica cocina napolitana. 
-            Pasta fresca, pizza de horno de leña y el calor de una verdadera trattoria italiana.
+          <p
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+            style={{ color: `${colors.cream}cc`, fontFamily: 'Source Sans Pro, sans-serif' }}
+          >
+            Pasta fresca artesanal y pizza napolitana horneada en leña. 
+            Una tradición familiar que celebra los sabores auténticos de Italia.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="#booking"
-              className="px-10 py-4 text-lg font-semibold tracking-wide transition-all hover:scale-105 inline-flex items-center justify-center gap-2"
-              style={{ backgroundColor: colors.terracotta, color: colors.cream }}
+              href="#reservas"
+              className="px-10 py-4 text-lg tracking-wide transition-all hover:scale-105 inline-flex items-center gap-2"
+              style={{ backgroundColor: colors.terracotta, color: colors.cream, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
               Reservar Mesa
-              <Calendar className="w-5 h-5" />
+              <ArrowRight size={20} />
             </a>
             <a
-              href="#menu"
-              className="px-10 py-4 text-lg font-semibold tracking-wide transition-all hover:scale-105 inline-flex items-center justify-center gap-2"
-              style={{ backgroundColor: 'transparent', color: colors.cream, border: `2px solid ${colors.cream}` }}
+              href="#carta"
+              className="px-10 py-4 text-lg tracking-wide border-2 transition-all hover:bg-white hover:bg-opacity-10"
+              style={{ borderColor: colors.cream, color: colors.cream, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              Ver Menú
-              <ChevronRight className="w-5 h-5" />
+              Ver Carta
             </a>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-8 h-14 rounded-full border-2 flex justify-center pt-2" style={{ borderColor: `${colors.cream}60` }}>
-            <div className="w-2 h-3 rounded-full" style={{ backgroundColor: colors.cream }} />
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 rounded-full flex justify-center pt-2" style={{ borderColor: `${colors.cream}50` }}>
+            <div className="w-1 h-2 rounded-full" style={{ backgroundColor: colors.cream }} />
           </div>
         </div>
       </section>
 
       {/* About Split Section */}
-      <section id="about" className="py-24 lg:py-32" style={{ backgroundColor: colors.cream }}>
+      <section id="historia" className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-sm tracking-[0.2em] uppercase mb-4" style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                Nuestra Historia
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>
-                Tres Generaciones de Pasión Italiana
-              </h2>
-              <div className="space-y-6 text-lg leading-relaxed" style={{ color: colors.taupe, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                <p>
-                  En 1987, una familia napolitana llegó con un sueño: compartir los sabores auténticos de su tierra natal. 
-                  Con las recetas de la abuela cuidadosamente guardadas y el corazón lleno de nostalgia por los aromas de Nápoles, 
-                  abrimos las puertas de nuestra pequeña trattoria.
-                </p>
-                <p>
-                  Hoy, más de tres décadas después, seguimos amasando la pasta a mano cada mañana, 
-                  manteniendo vivo el horno de leña que importamos de Italia, y recibiendo a cada comensal 
-                  como un miembro más de nuestra familia.
-                </p>
-              </div>
-              <div className="flex items-center gap-8 mt-10">
-                <div className="text-center">
-                  <span className="text-4xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: colors.terracotta }}>35+</span>
-                  <p className="text-sm mt-1" style={{ color: colors.taupe }}>Años de tradición</p>
-                </div>
-                <div className="w-px h-16" style={{ backgroundColor: colors.taupe }} />
-                <div className="text-center">
-                  <span className="text-4xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: colors.terracotta }}>3</span>
-                  <p className="text-sm mt-1" style={{ color: colors.taupe }}>Generaciones</p>
-                </div>
-                <div className="w-px h-16" style={{ backgroundColor: colors.taupe }} />
-                <div className="text-center">
-                  <span className="text-4xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: colors.terracotta }}>∞</span>
-                  <p className="text-sm mt-1" style={{ color: colors.taupe }}>Amor por Italia</p>
-                </div>
-              </div>
-            </div>
-            
+            {/* Left side - Image placeholder */}
             <div className="relative">
               <div
-                className="aspect-[4/5] flex items-center justify-center relative overflow-hidden"
+                className="aspect-[4/5] relative"
                 style={{
-                  background: `linear-gradient(145deg, ${colors.terracotta}40, ${colors.olive}30)`,
-                  borderRadius: '0 60px 0 60px'
+                  background: `linear-gradient(145deg, ${colors.terracotta}, ${colors.walnut})`,
+                  borderRadius: '4px'
                 }}
               >
-                <div className="text-center p-8">
-                  <Heart className="w-20 h-20 mx-auto mb-6" style={{ color: colors.terracotta }} />
-                  <p className="text-2xl font-serif italic" style={{ color: colors.espresso, fontFamily: 'Playfair Display, serif' }}>
-                    &ldquo;La cocina es el corazón del hogar&rdquo;
-                  </p>
-                  <p className="mt-4 text-sm tracking-wider" style={{ color: colors.taupe }}>— Proverbio italiano</p>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center" style={{ color: colors.cream }}>
+                    <Users size={64} className="mx-auto mb-4 opacity-50" />
+                    <p className="text-sm tracking-widest uppercase opacity-70">Familia Fundadora</p>
+                  </div>
                 </div>
               </div>
+              {/* Decorative element */}
               <div
-                className="absolute -bottom-6 -left-6 w-32 h-32 flex items-center justify-center"
-                style={{ backgroundColor: colors.olive }}
-              >
-                <ChefHat className="w-12 h-12" style={{ color: colors.cream }} />
-              </div>
+                className="absolute -bottom-8 -right-8 w-48 h-48 -z-10"
+                style={{
+                  background: `repeating-linear-gradient(45deg, ${colors.olive}20, ${colors.olive}20 10px, transparent 10px, transparent 20px)`
+                }}
+              />
             </div>
-          </div>
 
-          {/* Timeline */}
-          <div className="mt-24">
-            <h3 className="text-2xl font-bold text-center mb-16" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>
-              Nuestra Trayectoria
-            </h3>
-            <div className="relative">
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px hidden lg:block" style={{ backgroundColor: `${colors.terracotta}30` }} />
-              <div className="space-y-12 lg:space-y-0">
+            {/* Right side - Content */}
+            <div>
+              <p
+                className="text-sm tracking-[0.2em] uppercase mb-4"
+                style={{ color: colors.olive, fontFamily: 'Source Sans Pro, sans-serif' }}
+              >
+                Nuestra Historia
+              </p>
+              <h2
+                className="text-4xl md:text-5xl mb-8 leading-tight"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}
+              >
+                Tres generaciones de pasión por la cocina italiana
+              </h2>
+              <div className="space-y-6" style={{ fontFamily: 'Source Sans Pro, sans-serif', color: colors.walnut }}>
+                <p className="text-lg leading-relaxed">
+                  En 1987, una familia napolitana llegó con un sueño: compartir los sabores auténticos de su tierra natal. Con recetas heredadas de la nonna y el amor por la cocina tradicional, abrieron las puertas de Trattoria Napoli.
+                </p>
+                <p className="text-lg leading-relaxed">
+                  Hoy, mantenemos viva esa tradición. Cada mañana amasamos nuestra pasta a mano, seleccionamos los mejores ingredientes importados de Italia y preparamos cada plato como si fuera para nuestra propia familia.
+                </p>
+              </div>
+
+              {/* Timeline */}
+              <div className="mt-12 space-y-4">
                 {timelineEvents.map((event, index) => (
-                  <div key={event.year} className={`lg:flex items-center ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}>
-                    <div className={`lg:w-1/2 ${index % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:pl-16'}`}>
-                      <div className="p-6 transition-all hover:shadow-lg" style={{ backgroundColor: `${colors.cream}`, border: `1px solid ${colors.taupe}30` }}>
-                        <span className="text-3xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: colors.terracotta }}>{event.year}</span>
-                        <h4 className="text-xl font-semibold mt-2 mb-3" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>{event.title}</h4>
-                        <p style={{ color: colors.taupe, fontFamily: 'Source Sans Pro, sans-serif' }}>{event.description}</p>
-                      </div>
+                  <div key={index} className="flex items-start gap-4">
+                    <div
+                      className="w-16 h-16 flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: colors.terracotta, color: colors.cream }}
+                    >
+                      <span className="font-serif text-sm" style={{ fontFamily: 'Playfair Display, serif' }}>
+                        {event.year}
+                      </span>
                     </div>
-                    <div className="hidden lg:flex w-4 h-4 rounded-full absolute left-1/2 transform -translate-x-1/2" style={{ backgroundColor: colors.terracotta, top: `${index * 25 + 5}%` }} />
-                    <div className="lg:w-1/2" />
+                    <div>
+                      <h4 className="font-semibold" style={{ color: colors.espresso }}>{event.title}</h4>
+                      <p className="text-sm" style={{ color: colors.walnut }}>{event.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -316,167 +361,284 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Menu Categories */}
-      <section id="menu" className="py-24 lg:py-32" style={{ backgroundColor: colors.espresso }}>
+      {/* Menu Categories Section */}
+      <section id="carta" className="py-24 lg:py-32" style={{ backgroundColor: colors.espresso }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <p className="text-sm tracking-[0.2em] uppercase mb-4" style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}>
+            <p
+              className="text-sm tracking-[0.2em] uppercase mb-4"
+              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
               Nuestra Carta
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}>
-              Sabores de Nápoles
+            <h2
+              className="text-4xl md:text-5xl mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
+            >
+              Sabores de Italia
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: `${colors.cream}aa`, fontFamily: 'Source Sans Pro, sans-serif' }}>
-              Cada plato cuenta una historia de tradición, pasión y los mejores ingredientes importados de Italia
+            <p
+              className="max-w-2xl mx-auto text-lg"
+              style={{ color: `${colors.cream}aa`, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              Cada plato cuenta una historia, cada ingrediente es seleccionado con cuidado
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {menuCategories.map((category, index) => (
-              <a
-                key={category.name}
-                href="#specials"
-                className="group relative p-8 transition-all duration-300 hover:scale-105 overflow-hidden"
-                style={{ 
-                  backgroundColor: index % 2 === 0 ? `${colors.terracotta}15` : `${colors.olive}15`,
-                  border: `1px solid ${colors.taupe}30`
-                }}
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 opacity-5 transform translate-x-8 -translate-y-8">
-                  <category.icon className="w-full h-full" style={{ color: colors.cream }} />
-                </div>
-                <category.icon className="w-10 h-10 mb-4" style={{ color: colors.terracotta }} />
-                <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}>
+          {/* Category tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {menuCategories.map((category, index) => {
+              const IconComponent = category.icon
+              return (
+                <button
+                  key={index}
+                  onClick={() => setActiveCategory(index)}
+                  className={`px-6 py-3 flex items-center gap-2 transition-all ${activeCategory === index ? 'scale-105' : 'opacity-70 hover:opacity-100'}`}
+                  style={{
+                    backgroundColor: activeCategory === index ? colors.terracotta : 'transparent',
+                    color: colors.cream,
+                    border: `1px solid ${activeCategory === index ? colors.terracotta : colors.walnut}`,
+                    fontFamily: 'Source Sans Pro, sans-serif'
+                  }}
+                >
+                  <IconComponent size={18} />
                   {category.name}
-                </h3>
-                <p className="mb-4" style={{ color: `${colors.cream}88`, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                  {category.description}
-                </p>
-                <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-4 transition-all" style={{ color: colors.terracotta }}>
-                  Explorar <ArrowRight className="w-4 h-4" />
-                </span>
-              </a>
-            ))}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Active category display */}
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div
+              className="aspect-square flex items-center justify-center"
+              style={{
+                background: `linear-gradient(135deg, ${colors.walnut}, ${colors.terracotta}80)`,
+                borderRadius: '4px'
+              }}
+            >
+              {(() => {
+                const IconComponent = menuCategories[activeCategory].icon
+                return <IconComponent size={120} style={{ color: `${colors.cream}50` }} />
+              })()}
+            </div>
+
+            <div>
+              <h3
+                className="text-3xl mb-4"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
+              >
+                {menuCategories[activeCategory].name}
+              </h3>
+              <p
+                className="text-lg mb-8"
+                style={{ color: `${colors.cream}aa`, fontFamily: 'Source Sans Pro, sans-serif' }}
+              >
+                {menuCategories[activeCategory].description}
+              </p>
+              <ul className="space-y-4">
+                {menuCategories[activeCategory].items.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center justify-between py-3 border-b"
+                    style={{ borderColor: `${colors.walnut}50` }}
+                  >
+                    <span style={{ color: colors.cream, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                      {item}
+                    </span>
+                    <span
+                      className="text-sm"
+                      style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+                    >
+                      Consultar precio
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section id="specials" className="py-24 lg:py-32" style={{ backgroundColor: colors.cream }}>
+      {/* Featured Dishes Section */}
+      <section id="especialidades" className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-6">
-            <div>
-              <p className="text-sm tracking-[0.2em] uppercase mb-4" style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                Del Chef
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>
-                Platos Especiales
-              </h2>
-            </div>
-            <a
-              href="#menu"
-              className="inline-flex items-center gap-2 text-lg font-medium hover:gap-4 transition-all"
-              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+          <div className="text-center mb-16">
+            <p
+              className="text-sm tracking-[0.2em] uppercase mb-4"
+              style={{ color: colors.olive, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              Ver carta completa <ArrowRight className="w-5 h-5" />
-            </a>
+              Del Día
+            </p>
+            <h2
+              className="text-4xl md:text-5xl mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}
+            >
+              Platos Especiales
+            </h2>
+            <p
+              className="max-w-2xl mx-auto text-lg"
+              style={{ color: colors.walnut, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              Las joyas de nuestra cocina, preparadas con los ingredientes más frescos de temporada
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {featuredDishes.map((dish, index) => (
               <div
-                key={dish.name}
-                className="group relative overflow-hidden transition-all duration-300 hover:shadow-2xl"
-                style={{ backgroundColor: colors.cream, border: `1px solid ${colors.taupe}30` }}
+                key={index}
+                className="group relative overflow-hidden transition-all hover:scale-[1.02]"
+                style={{ backgroundColor: colors.cream, border: `1px solid ${colors.terracotta}30` }}
               >
-                <div className="flex flex-col lg:flex-row">
-                  <div
-                    className="lg:w-2/5 aspect-square lg:aspect-auto flex items-center justify-center"
-                    style={{
-                      background: `linear-gradient(135deg, ${colors.terracotta}${index % 2 === 0 ? '60' : '40'}, ${colors.olive}${index % 2 === 0 ? '40' : '60'})`
-                    }}
+                {/* Image placeholder */}
+                <div
+                  className="h-64"
+                  style={{
+                    background: `linear-gradient(${135 + index * 30}deg, ${colors.terracotta}40, ${colors.olive}30)`
+                  }}
+                >
+                  <div className="h-full flex items-center justify-center">
+                    <Utensils size={48} style={{ color: colors.walnut }} className="opacity-30" />
+                  </div>
+                </div>
+
+                {/* Tag */}
+                <div
+                  className="absolute top-4 left-4 px-4 py-2"
+                  style={{ backgroundColor: colors.terracotta, color: colors.cream }}
+                >
+                  <span className="text-xs tracking-widest uppercase" style={{ fontFamily: 'Source Sans Pro, sans-serif' }}>
+                    {dish.tag}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="p-8">
+                  <h3
+                    className="text-2xl mb-4"
+                    style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}
                   >
-                    <Utensils className="w-16 h-16" style={{ color: colors.cream }} />
-                  </div>
-                  <div className="lg:w-3/5 p-8">
-                    <span className="text-xs tracking-wider uppercase" style={{ color: colors.olive, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                      {dish.category}
-                    </span>
-                    <h3 className="text-2xl font-bold mt-2 mb-4" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>
-                      {dish.name}
-                    </h3>
-                    <p className="leading-relaxed" style={{ color: colors.taupe, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                      {dish.description}
-                    </p>
-                    <div className="mt-6 flex items-center justify-between">
-                      <span className="text-sm" style={{ color: colors.taupe }}>Consultar precio</span>
-                      <span className="flex items-center gap-1" style={{ color: colors.terracotta }}>
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                      </span>
-                    </div>
-                  </div>
+                    {dish.name}
+                  </h3>
+                  <p
+                    className="leading-relaxed"
+                    style={{ color: colors.walnut, fontFamily: 'Source Sans Pro, sans-serif' }}
+                  >
+                    {dish.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Daily Special Banner */}
-          <div
-            className="mt-16 p-8 lg:p-12 text-center relative overflow-hidden"
-            style={{
-              background: `linear-gradient(135deg, ${colors.olive} 0%, ${colors.espresso} 100%)`
-            }}
-          >
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-4 left-4 w-24 h-24 rounded-full" style={{ border: `2px solid ${colors.cream}` }} />
-              <div className="absolute bottom-4 right-4 w-32 h-32 rounded-full" style={{ border: `2px solid ${colors.cream}` }} />
-            </div>
-            <div className="relative z-10">
-              <Flame className="w-12 h-12 mx-auto mb-4" style={{ color: colors.terracotta }} />
-              <p className="text-sm tracking-[0.3em] uppercase mb-2" style={{ color: `${colors.cream}aa` }}>Especial del Día</p>
-              <h3 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}>
-                Pregunta a nuestro equipo por las creaciones de hoy
-              </h3>
-              <p style={{ color: `${colors.cream}cc`, fontFamily: 'Source Sans Pro, sans-serif' }}>
-                Cada día preparamos platos especiales con los ingredientes más frescos del mercado
-              </p>
-            </div>
+      {/* Gallery Masonry Section */}
+      <section id="galeria" className="py-24 lg:py-32" style={{ backgroundColor: `${colors.terracotta}15` }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p
+              className="text-sm tracking-[0.2em] uppercase mb-4"
+              style={{ color: colors.olive, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              Momentos
+            </p>
+            <h2
+              className="text-4xl md:text-5xl mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}
+            >
+              Nuestra Galería
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryItems.map((item, index) => (
+              <div
+                key={index}
+                className={`relative overflow-hidden group cursor-pointer ${item.aspect === 'tall' ? 'row-span-2' : item.aspect === 'wide' ? 'col-span-2' : ''}`}
+                style={{
+                  background: `linear-gradient(${index * 45}deg, ${colors.terracotta}, ${colors.walnut})`,
+                  minHeight: item.aspect === 'tall' ? '400px' : '200px'
+                }}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center p-4">
+                    <Utensils size={32} style={{ color: `${colors.cream}50` }} className="mx-auto mb-2" />
+                    <p
+                      className="text-sm tracking-wide"
+                      style={{ color: `${colors.cream}90`, fontFamily: 'Source Sans Pro, sans-serif' }}
+                    >
+                      {item.title}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                  style={{ backgroundColor: `${colors.espresso}80` }}
+                >
+                  <span style={{ color: colors.cream, fontFamily: 'Playfair Display, serif' }} className="text-xl">
+                    {item.title}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Masonry */}
-      <section id="gallery" className="py-24 lg:py-32" style={{ backgroundColor: `${colors.taupe}15` }}>
+      {/* Process Steps Section */}
+      <section className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-sm tracking-[0.2em] uppercase mb-4" style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}>
-              Galería
+          <div className="text-center mb-16">
+            <p
+              className="text-sm tracking-[0.2em] uppercase mb-4"
+              style={{ color: colors.olive, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              Nuestro Proceso
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}>
-              Momentos en Trattoria
+            <h2
+              className="text-4xl md:text-5xl mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}
+            >
+              Del Corazón a Tu Mesa
             </h2>
           </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {['Todos', 'Cocina', 'Espacio', 'Tradición'].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className="px-6 py-2 text-sm font-medium transition-all"
-                style={{
-                  backgroundColor: selectedCategory === cat ? colors.terracotta : 'transparent',
-                  color: selectedCategory === cat ? colors.cream : colors.espresso,
-                  border: `1px solid ${colors.terracotta}`
-                }}
-              >
-                {cat}
-              </button>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step, index) => (
+              <div key={index} className="text-center group">
+                <div
+                  className="w-20 h-20 mx-auto mb-6 flex items-center justify-center transition-transform group-hover:scale-110"
+                  style={{ backgroundColor: colors.terracotta, color: colors.cream }}
+                >
+                  <span className="text-2xl font-serif" style={{ fontFamily: 'Playfair Display, serif' }}>
+                    {step.step}
+                  </span>
+                </div>
+                <h3
+                  className="text-xl mb-4"
+                  style={{ fontFamily: 'Playfair Display, serif', color: colors.espresso }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="leading-relaxed"
+                  style={{ color: colors.walnut, fontFamily: 'Source Sans Pro, sans-serif' }}
+                >
+                  {step.description}
+                </p>
+                {index < processSteps.length - 1 && (
+                  <div className="hidden lg:block absolute top-10 right-0 w-full">
+                    <ArrowRight size={24} style={{ color: colors.terracotta }} />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Masonry Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galleryItems.map((item, index)
+      {/* Testimonials Carousel Section */}
+      <section className="py-24 lg:py-32" style={{ backgroundColor: colors.espresso }}>
+        <div className="max-w-4xl
