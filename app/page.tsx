@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from 'react'
 import {
   Menu,
   X,
@@ -8,223 +8,203 @@ import {
   Mail,
   MapPin,
   Clock,
-  ChefHat,
-  Wine,
-  Utensils,
-  Star,
-  Calendar,
-  Users,
-  ArrowRight,
-  Instagram,
-  Facebook,
-  Heart,
-  Leaf,
-  Flame,
-  ChevronLeft,
   ChevronRight,
-} from "lucide-react";
+  Star,
+  Utensils,
+  Wine,
+  Users,
+  Calendar,
+  ChevronLeft,
+  Heart,
+  Flame,
+  Leaf,
+  Award
+} from 'lucide-react'
 
 const colors = {
-  terracotta: "#C4613A",
-  cream: "#F5EDE4",
-  olive: "#6B7F59",
-  darkBrown: "#3D2E2A",
-  taupe: "#9A8B7A",
-};
+  cream: '#F5EDE4',
+  warmGray: '#E8DDD4',
+  terracotta: '#C4703D',
+  forestGreen: '#2C3B2D',
+  brownOlive: '#8B7355'
+}
 
 const navLinks = [
-  { name: "Inicio", href: "#hero" },
-  { name: "Nosotros", href: "#about" },
-  { name: "Carta", href: "#menu" },
-  { name: "Especialidades", href: "#specials" },
-  { name: "Galería", href: "#gallery" },
-  { name: "Reservar", href: "#booking" },
-  { name: "Contacto", href: "#contact" },
-];
+  { name: 'Inicio', href: '#hero' },
+  { name: 'Nuestra Historia', href: '#about' },
+  { name: 'Carta', href: '#menu' },
+  { name: 'Especialidades', href: '#specialties' },
+  { name: 'Galería', href: '#gallery' },
+  { name: 'Reservas', href: '#booking' },
+  { name: 'Contacto', href: '#contact' }
+]
 
 const menuCategories = [
   {
-    name: "Antipasti",
-    icon: Leaf,
-    description: "Entrantes tradicionales italianos preparados con ingredientes frescos del mercado",
-    items: ["Bruschetta al Pomodoro", "Carpaccio di Manzo", "Burrata con Prosciutto", "Calamari Fritti"],
-  },
-  {
-    name: "Pasta Fresca",
-    icon: ChefHat,
-    description: "Pasta artesanal elaborada cada día en nuestra cocina siguiendo recetas familiares",
-    items: ["Tagliatelle al Ragù", "Ravioli di Ricotta e Spinaci", "Pappardelle ai Funghi Porcini", "Gnocchi alla Sorrentina"],
-  },
-  {
-    name: "Pizza Napoletana",
-    icon: Flame,
-    description: "Auténtica pizza napolitana cocida en horno de leña a 450 grados",
-    items: ["Margherita DOP", "Diavola", "Quattro Formaggi", "Napoli con Anchoas"],
-  },
-  {
-    name: "Secondi Piatti",
     icon: Utensils,
-    description: "Platos principales de carne y pescado preparados según la tradición italiana",
-    items: ["Ossobuco alla Milanese", "Saltimbocca alla Romana", "Branzino al Forno", "Pollo alla Parmigiana"],
+    title: 'Pasta Fresca',
+    description: 'Elaborada cada mañana con harina italiana importada y huevos de corral',
+    items: ['Tagliatelle al Ragù', 'Pappardelle ai Funghi Porcini', 'Ravioli di Ricotta e Spinaci', 'Spaghetti alle Vongole']
   },
   {
-    name: "Dolci",
-    icon: Heart,
-    description: "Postres caseros elaborados con las recetas de la nonna",
-    items: ["Tiramisù della Casa", "Panna Cotta", "Cannoli Siciliani", "Semifreddo al Limoncello"],
+    icon: Flame,
+    title: 'Pizza Napoletana',
+    description: 'Masa fermentada 72 horas y horneada en nuestro horno de leña a 450°C',
+    items: ['Margherita D.O.P.', 'Diavola', 'Quattro Formaggi', 'Prosciutto e Rucola']
   },
   {
-    name: "Vini",
     icon: Wine,
-    description: "Selección de vinos italianos de las mejores regiones vinícolas",
-    items: ["Chianti Classico", "Barolo", "Montepulciano", "Prosecco"],
+    title: 'Secondi Piatti',
+    description: 'Carnes y pescados preparados según las recetas de la Nonna',
+    items: ['Ossobuco alla Milanese', 'Saltimbocca alla Romana', 'Branzino al Forno', 'Pollo alla Cacciatora']
   },
-];
+  {
+    icon: Leaf,
+    title: 'Antipasti e Contorni',
+    description: 'Entrantes y guarniciones que celebran la simplicidad italiana',
+    items: ['Burrata con Pomodorini', 'Carpaccio di Manzo', 'Caponata Siciliana', 'Verdure Grigliate']
+  }
+]
 
 const featuredDishes = [
   {
-    name: "Tagliatelle al Ragù della Nonna",
-    description: "Nuestra pasta insignia, elaborada con la receta original de 1987. Tagliatelle fresco con ragú de carne cocinado lentamente durante 6 horas.",
-    tag: "Especialidad de la Casa",
+    name: 'Tagliatelle al Tartufo Nero',
+    description: 'Pasta fresca con mantequilla de trufa negra de Norcia y parmigiano reggiano 36 meses',
+    tag: 'Especialidad de la Casa',
+    gradient: 'linear-gradient(135deg, #2C3B2D 0%, #8B7355 100%)'
   },
   {
-    name: "Pizza Margherita DOP",
-    description: "Auténtica pizza napolitana con tomate San Marzano, mozzarella di bufala campana y albahaca fresca. Cocida en nuestro horno de leña importado de Nápoles.",
-    tag: "Clásico Napolitano",
+    name: 'Pizza Margherita D.O.P.',
+    description: 'Tomate San Marzano, mozzarella di bufala campana, albahaca fresca y aceite de oliva virgen extra',
+    tag: 'Clásico Napolitano',
+    gradient: 'linear-gradient(135deg, #C4703D 0%, #8B7355 100%)'
   },
   {
-    name: "Ossobuco alla Milanese",
-    description: "Jarrete de ternera estofado lentamente en vino blanco con gremolata, servido sobre risotto alla milanese con azafrán.",
-    tag: "Tradición Lombarda",
+    name: 'Tiramisù della Nonna',
+    description: 'Receta familiar desde 1987 con mascarpone artesanal y café espresso italiano',
+    tag: 'Postre Estrella',
+    gradient: 'linear-gradient(135deg, #8B7355 0%, #E8DDD4 100%)'
+  }
+]
+
+const galleryItems = [
+  { gradient: 'linear-gradient(45deg, #C4703D, #8B7355)', label: 'Interior del restaurante' },
+  { gradient: 'linear-gradient(135deg, #2C3B2D, #8B7355)', label: 'Nuestro horno de leña' },
+  { gradient: 'linear-gradient(180deg, #E8DDD4, #C4703D)', label: 'Pasta fresca del día' },
+  { gradient: 'linear-gradient(90deg, #8B7355, #2C3B2D)', label: 'Familia fundadora' },
+  { gradient: 'linear-gradient(225deg, #C4703D, #F5EDE4)', label: 'Pizza recién horneada' },
+  { gradient: 'linear-gradient(315deg, #2C3B2D, #C4703D)', label: 'Bodega de vinos' }
+]
+
+const processSteps = [
+  {
+    number: '01',
+    title: 'Selección de Ingredientes',
+    description: 'Cada mañana seleccionamos los mejores productos frescos del mercado y proveedores italianos de confianza'
   },
   {
-    name: "Tiramisù della Casa",
-    description: "El postre italiano por excelencia, preparado cada mañana con mascarpone cremoso, café espresso y cacao amargo. Receta familiar desde 1987.",
-    tag: "Dolce Vita",
+    number: '02',
+    title: 'Preparación Artesanal',
+    description: 'Nuestros chefs elaboran la pasta a mano siguiendo las técnicas tradicionales transmitidas por generaciones'
   },
-];
+  {
+    number: '03',
+    title: 'Cocción Perfecta',
+    description: 'Cada plato se prepara al momento, respetando los tiempos y temperaturas que exige la auténtica cocina italiana'
+  },
+  {
+    number: '04',
+    title: 'Presentación con Amor',
+    description: 'Servimos cada creación con el cariño y la dedicación que caracteriza a nuestra familia desde 1987'
+  }
+]
 
 const testimonials = [
   {
-    text: "Como si hubieras viajado a Italia sin salir de la ciudad. La pasta fresca es incomparable y el ambiente te transporta directamente a una trattoria romana.",
-    author: "Cliente desde 2005",
-    rating: 5,
+    text: 'La mejor pasta que he probado fuera de Italia. Se nota que está hecha con amor y tradición familiar.',
+    author: 'Cliente habitual desde 2005',
+    rating: 5
   },
   {
-    text: "Tres generaciones de mi familia han celebrado aquí nuestros momentos más especiales. La calidad y el cariño en cada plato no han cambiado en todos estos años.",
-    author: "Cliente desde 1992",
-    rating: 5,
+    text: 'El ambiente te transporta directamente a una trattoria romana. La pizza es simplemente perfecta.',
+    author: 'Visitante de Madrid',
+    rating: 5
   },
   {
-    text: "La mejor pizza napolitana que he probado fuera de Nápoles. El horno de leña marca la diferencia. Un lugar con alma y tradición auténtica.",
-    author: "Cliente frecuente",
-    rating: 5,
-  },
-  {
-    text: "El tiramisù me recordó al que preparaba mi abuela italiana. Cada bocado es un viaje nostálgico a la verdadera cocina casera italiana.",
-    author: "Cliente desde 2010",
-    rating: 5,
-  },
-];
+    text: 'Celebramos aquí todas nuestras ocasiones especiales. El servicio es impecable y la comida, excepcional.',
+    author: 'Familia cliente desde 1995',
+    rating: 5
+  }
+]
 
-const galleryItems = [
-  { title: "Pasta Fresca del Día", aspect: "tall" },
-  { title: "Nuestro Horno de Leña", aspect: "wide" },
-  { title: "Pizza Margherita", aspect: "square" },
-  { title: "Interior del Restaurante", aspect: "tall" },
-  { title: "Tiramisù Casero", aspect: "square" },
-  { title: "Mesa con Vista", aspect: "wide" },
-  { title: "Vinos Selectos", aspect: "square" },
-  { title: "Detalle de Decoración", aspect: "square" },
-];
-
-const timeline = [
-  { year: "1987", event: "Apertura de Trattoria Napoli por la primera generación de la familia" },
-  { year: "1995", event: "Instalación del horno de leña tradicional importado de Nápoles" },
-  { year: "2005", event: "La segunda generación toma las riendas de la cocina" },
-  { year: "2015", event: "Renovación del local manteniendo la esencia original" },
-  { year: "2024", event: "La tercera generación continúa el legado familiar" },
-];
+const timelineEvents = [
+  { year: '1987', event: 'Apertura del restaurante por la familia fundadora' },
+  { year: '1995', event: 'Instalación del horno de leña importado de Nápoles' },
+  { year: '2005', event: 'Segunda generación toma el relevo en cocina' },
+  { year: '2015', event: 'Renovación respetando la esencia original' },
+  { year: '2024', event: 'Más de tres décadas de tradición italiana' }
+]
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    date: "",
-    time: "",
-    guests: "2",
-    message: "",
-  });
-
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("Gracias por su solicitud de reserva. Nos pondremos en contacto pronto para confirmar.");
-  };
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+  }
 
   const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }
 
   return (
-    <main style={{ backgroundColor: colors.cream, color: colors.darkBrown }}>
-      {/* Sticky Navigation */}
+    <main style={{ backgroundColor: colors.cream }}>
+      {/* Navigation */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{ backgroundColor: `${colors.cream}f5`, backdropFilter: "blur(10px)" }}
+        style={{ backgroundColor: `${colors.cream}F0`, backdropFilter: 'blur(10px)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
             <a href="#hero" className="flex items-center gap-3">
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: colors.terracotta }}
               >
-                <ChefHat className="w-6 h-6 text-white" />
+                <Utensils className="w-6 h-6" style={{ color: colors.cream }} />
               </div>
               <div>
-                <h1
-                  className="text-xl font-bold tracking-wide"
-                  style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
+                <span
+                  className="block text-xl font-bold"
+                  style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
                 >
                   Trattoria Napoli
-                </h1>
-                <p className="text-xs tracking-widest uppercase" style={{ color: colors.taupe }}>
-                  Dal 1987
-                </p>
+                </span>
+                <span className="text-xs tracking-widest" style={{ color: colors.brownOlive }}>
+                  DAL 1987
+                </span>
               </div>
             </a>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm tracking-wide hover:opacity-70 transition-opacity"
-                  style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.darkBrown }}
+                  className="text-sm font-medium transition-colors hover:opacity-70"
+                  style={{ color: colors.forestGreen, fontFamily: 'Source Sans Pro, sans-serif' }}
                 >
                   {link.name}
                 </a>
               ))}
               <a
                 href="#booking"
-                className="px-6 py-3 text-sm tracking-wider uppercase transition-all hover:scale-105"
+                className="px-6 py-3 text-sm font-semibold transition-all hover:scale-105"
                 style={{
                   backgroundColor: colors.terracotta,
                   color: colors.cream,
-                  fontFamily: "Source Sans Pro, sans-serif",
+                  fontFamily: 'Source Sans Pro, sans-serif'
                 }}
               >
                 Reservar Mesa
@@ -233,15 +213,11 @@ export default function HomePage() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
+              className="lg:hidden p-2"
+              style={{ color: colors.forestGreen }}
             >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6" style={{ color: colors.darkBrown }} />
-              ) : (
-                <Menu className="w-6 h-6" style={{ color: colors.darkBrown }} />
-              )}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -249,7 +225,7 @@ export default function HomePage() {
         {/* Mobile Menu */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ${
-            mobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+            mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
           }`}
           style={{ backgroundColor: colors.cream }}
         >
@@ -258,22 +234,22 @@ export default function HomePage() {
               <a
                 key={link.name}
                 href={link.href}
-                className="block py-3 text-lg border-b"
-                style={{
-                  fontFamily: "Playfair Display, serif",
-                  color: colors.darkBrown,
-                  borderColor: `${colors.taupe}30`,
-                }}
                 onClick={() => setMobileMenuOpen(false)}
+                className="block py-3 text-lg font-medium border-b"
+                style={{
+                  color: colors.forestGreen,
+                  borderColor: colors.warmGray,
+                  fontFamily: 'Source Sans Pro, sans-serif'
+                }}
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#booking"
-              className="block text-center py-4 mt-4"
-              style={{ backgroundColor: colors.terracotta, color: colors.cream }}
               onClick={() => setMobileMenuOpen(false)}
+              className="block text-center py-4 mt-4 font-semibold"
+              style={{ backgroundColor: colors.terracotta, color: colors.cream }}
             >
               Reservar Mesa
             </a>
@@ -281,378 +257,418 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Full */}
+      {/* Hero Section */}
       <section
         id="hero"
         className="relative min-h-screen flex items-center justify-center"
         style={{
-          background: `linear-gradient(135deg, ${colors.darkBrown} 0%, ${colors.terracotta}90 50%, ${colors.olive}80 100%)`,
+          background: `linear-gradient(135deg, ${colors.forestGreen} 0%, ${colors.brownOlive} 50%, ${colors.terracotta} 100%)`
         }}
       >
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F5EDE4' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `radial-gradient(circle at 20% 50%, ${colors.cream} 1px, transparent 1px),
+                             radial-gradient(circle at 80% 50%, ${colors.cream} 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
           }}
         />
-        
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div
-            className="inline-block px-6 py-2 mb-8 border"
-            style={{ borderColor: `${colors.cream}50` }}
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+          <span
+            className="inline-block px-6 py-2 mb-8 text-sm tracking-widest border"
+            style={{
+              color: colors.cream,
+              borderColor: `${colors.cream}50`,
+              fontFamily: 'Source Sans Pro, sans-serif'
+            }}
           >
-            <span
-              className="text-sm tracking-[0.3em] uppercase"
-              style={{ color: colors.cream, fontFamily: "Source Sans Pro, sans-serif" }}
-            >
-              Tradición Familiar desde 1987
-            </span>
-          </div>
-          
+            AUTÉNTICA COCINA ITALIANA DESDE 1987
+          </span>
           <h1
-            className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
-            style={{ fontFamily: "Playfair Display, serif", color: colors.cream }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
+            style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
           >
-            Trattoria
+            Donde la tradición
             <br />
-            <span style={{ color: colors.cream, opacity: 0.9 }}>Napoli</span>
+            <span style={{ color: colors.warmGray }}>se hace sabor</span>
           </h1>
-          
           <p
-            className="text-xl sm:text-2xl mb-4 italic"
-            style={{ fontFamily: "Playfair Display, serif", color: `${colors.cream}cc` }}
+            className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed"
+            style={{ color: `${colors.cream}CC`, fontFamily: 'Source Sans Pro, sans-serif' }}
           >
-            Auténtica Cocina Italiana
+            Tres generaciones elaborando pasta fresca cada mañana y pizzas napolitanas
+            en horno de leña, con el mismo amor de siempre.
           </p>
-          
-          <p
-            className="text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
-            style={{ fontFamily: "Source Sans Pro, sans-serif", color: `${colors.cream}99` }}
-          >
-            Pasta fresca artesanal y pizza napolitana cocida en horno de leña.
-            Tres generaciones dedicadas a traer los sabores de Italia a tu mesa.
-          </p>
-          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#booking"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg tracking-wider transition-all hover:scale-105"
+              className="px-10 py-5 text-lg font-semibold transition-all hover:scale-105 inline-flex items-center justify-center gap-2"
               style={{
                 backgroundColor: colors.cream,
-                color: colors.terracotta,
-                fontFamily: "Source Sans Pro, sans-serif",
+                color: colors.forestGreen,
+                fontFamily: 'Source Sans Pro, sans-serif'
               }}
             >
-              <Calendar className="w-5 h-5" />
               Reservar Mesa
+              <Calendar className="w-5 h-5" />
             </a>
             <a
               href="#menu"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg tracking-wider border-2 transition-all hover:bg-white/10"
+              className="px-10 py-5 text-lg font-semibold border-2 transition-all hover:bg-white/10 inline-flex items-center justify-center gap-2"
               style={{
                 borderColor: colors.cream,
                 color: colors.cream,
-                fontFamily: "Source Sans Pro, sans-serif",
+                fontFamily: 'Source Sans Pro, sans-serif'
               }}
             >
               Ver Carta
-              <ArrowRight className="w-5 h-5" />
+              <ChevronRight className="w-5 h-5" />
             </a>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32"
-          style={{
-            background: `linear-gradient(to top, ${colors.cream}, transparent)`,
-          }}
-        />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <ChevronRight className="w-8 h-8 rotate-90" style={{ color: colors.cream }} />
+        </div>
       </section>
 
-      {/* About Split */}
+      {/* About Section */}
       <section id="about" className="py-24 lg:py-32" style={{ backgroundColor: colors.cream }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Image Placeholder */}
-            <div className="relative">
-              <div
-                className="aspect-[4/5] flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(145deg, ${colors.terracotta}30, ${colors.olive}20)`,
-                }}
-              >
-                <div className="text-center p-8">
-                  <ChefHat className="w-20 h-20 mx-auto mb-4" style={{ color: colors.terracotta }} />
-                  <p
-                    className="text-lg italic"
-                    style={{ fontFamily: "Playfair Display, serif", color: colors.taupe }}
-                  >
-                    Interior de nuestra trattoria
-                  </p>
-                </div>
-              </div>
-              
-              {/* Floating Card */}
-              <div
-                className="absolute -bottom-6 -right-6 p-6 shadow-xl max-w-xs hidden lg:block"
-                style={{ backgroundColor: colors.darkBrown }}
-              >
-                <p
-                  className="text-4xl font-bold mb-2"
-                  style={{ fontFamily: "Playfair Display, serif", color: colors.terracotta }}
-                >
-                  37+
-                </p>
-                <p style={{ color: colors.cream, fontFamily: "Source Sans Pro, sans-serif" }}>
-                  Años de tradición familiar
-                </p>
-              </div>
-            </div>
-
-            {/* Content */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <span
-                className="text-sm tracking-[0.2em] uppercase"
-                style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
+                className="text-sm tracking-widest mb-4 block"
+                style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
-                Nuestra Historia
+                NUESTRA HISTORIA
               </span>
-              
               <h2
-                className="text-4xl lg:text-5xl font-bold mt-4 mb-6"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
               >
-                Una Tradición que
+                Una familia,
                 <br />
-                <span style={{ color: colors.terracotta }}>Nació del Amor</span>
+                una pasión
               </h2>
-              
-              <p
-                className="text-lg mb-6 leading-relaxed"
-                style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
+              <div
+                className="space-y-6 text-lg leading-relaxed"
+                style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
-                En 1987, nuestra familia abrió las puertas de Trattoria Napoli con un sueño:
-                compartir los auténticos sabores de la cocina italiana que habíamos heredado
-                de generación en generación.
-              </p>
-              
-              <p
-                className="text-lg mb-8 leading-relaxed"
-                style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
-              >
-                Hoy, tres generaciones después, seguimos amasando la pasta cada mañana,
-                encendiendo el horno de leña al atardecer y recibiendo a nuestros clientes
-                como si fueran familia. Porque en nuestra trattoria, cada mesa es una
-                extensión de nuestro hogar.
-              </p>
-
-              {/* Timeline */}
-              <div className="space-y-4 mb-8">
-                {timeline.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div
-                      className="flex-shrink-0 w-16 h-8 flex items-center justify-center"
-                      style={{ backgroundColor: `${colors.terracotta}20` }}
-                    >
-                      <span
-                        className="text-sm font-bold"
-                        style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
-                      >
-                        {item.year}
-                      </span>
-                    </div>
-                    <p
-                      className="text-sm"
-                      style={{ color: colors.darkBrown, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      {item.event}
-                    </p>
-                  </div>
-                ))}
+                <p>
+                  En 1987, una familia italiana llegó con un sueño: compartir los sabores
+                  auténticos de su tierra natal. Con recetas heredadas de generación en generación
+                  y el mismo amor por la cocina, abrimos las puertas de Trattoria Napoli.
+                </p>
+                <p>
+                  Hoy, la segunda y tercera generación continúan elaborando cada mañana la pasta
+                  fresca con harina italiana importada, preparando las masas de pizza con
+                  fermentación lenta de 72 horas, y seleccionando los mejores ingredientes
+                  para honrar nuestra herencia culinaria.
+                </p>
+                <p>
+                  Cada plato que servimos cuenta una historia. La historia de una familia
+                  que encontró su hogar lejos de casa, y que ahora les invita a ser parte
+                  de ella en cada visita.
+                </p>
               </div>
-
               <a
-                href="#menu"
-                className="inline-flex items-center gap-2 text-lg font-medium hover:gap-4 transition-all"
-                style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
+                href="#gallery"
+                className="inline-flex items-center gap-2 mt-8 text-lg font-semibold transition-colors"
+                style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
-                Descubre nuestra carta
-                <ArrowRight className="w-5 h-5" />
+                Descubre nuestra galería
+                <ChevronRight className="w-5 h-5" />
               </a>
+            </div>
+            <div className="relative">
+              <div
+                className="aspect-[4/5] rounded-lg relative overflow-hidden"
+                style={{
+                  background: `linear-gradient(180deg, ${colors.warmGray} 0%, ${colors.terracotta}40 100%)`
+                }}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <Heart className="w-16 h-16 mx-auto mb-4" style={{ color: colors.terracotta }} />
+                    <span
+                      className="text-lg"
+                      style={{ color: colors.forestGreen, fontFamily: 'Playfair Display, serif' }}
+                    >
+                      Tradición Familiar
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="absolute -bottom-8 -left-8 p-8 shadow-xl"
+                style={{ backgroundColor: colors.forestGreen }}
+              >
+                <div className="text-center">
+                  <span
+                    className="block text-5xl font-bold mb-2"
+                    style={{ color: colors.cream, fontFamily: 'Playfair Display, serif' }}
+                  >
+                    37
+                  </span>
+                  <span className="text-sm tracking-widest" style={{ color: colors.warmGray }}>
+                    AÑOS DE TRADICIÓN
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div className="mt-24 pt-16 border-t" style={{ borderColor: colors.warmGray }}>
+            <h3
+              className="text-2xl font-bold mb-12 text-center"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+            >
+              Nuestra Trayectoria
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 lg:gap-0">
+              {timelineEvents.map((item, index) => (
+                <div
+                  key={item.year}
+                  className="flex flex-col items-center text-center px-4 lg:px-8 relative"
+                >
+                  <span
+                    className="text-3xl font-bold mb-2"
+                    style={{ fontFamily: 'Playfair Display, serif', color: colors.terracotta }}
+                  >
+                    {item.year}
+                  </span>
+                  <div
+                    className="w-3 h-3 rounded-full mb-4"
+                    style={{ backgroundColor: colors.forestGreen }}
+                  />
+                  {index < timelineEvents.length - 1 && (
+                    <div
+                      className="hidden lg:block absolute top-12 left-1/2 w-full h-0.5"
+                      style={{ backgroundColor: colors.warmGray }}
+                    />
+                  )}
+                  <p
+                    className="text-sm max-w-32"
+                    style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
+                  >
+                    {item.event}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Menu Categories */}
-      <section id="menu" className="py-24 lg:py-32" style={{ backgroundColor: colors.darkBrown }}>
+      <section id="menu" className="py-24 lg:py-32" style={{ backgroundColor: colors.warmGray }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center mb-16">
             <span
-              className="text-sm tracking-[0.2em] uppercase"
-              style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
+              className="text-sm tracking-widest mb-4 block"
+              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              La Carta
+              NUESTRA CARTA
             </span>
-            
             <h2
-              className="text-4xl lg:text-5xl font-bold mt-4 mb-6"
-              style={{ fontFamily: "Playfair Display, serif", color: colors.cream }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
             >
               Sabores de Italia
             </h2>
-            
             <p
-              className="text-lg"
-              style={{ fontFamily: "Source Sans Pro, sans-serif", color: `${colors.cream}99` }}
+              className="text-xl max-w-2xl mx-auto"
+              style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              Cada plato cuenta una historia. Ingredientes frescos, recetas ancestrales
-              y el amor de tres generaciones en cada preparación.
+              Cada categoría de nuestra carta representa una tradición culinaria
+              italiana, elaborada con ingredientes de primera calidad
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {menuCategories.map((category, index) => {
-              const IconComponent = category.icon;
-              return (
-                <div
-                  key={index}
-                  className="group p-8 transition-all duration-300 hover:translate-y-[-4px]"
-                  style={{
-                    backgroundColor: `${colors.cream}08`,
-                    borderLeft: `3px solid ${colors.terracotta}`,
-                  }}
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div
-                      className="w-12 h-12 flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: `${colors.terracotta}20` }}
-                    >
-                      <IconComponent className="w-6 h-6" style={{ color: colors.terracotta }} />
-                    </div>
-                    <h3
-                      className="text-2xl font-bold"
-                      style={{ fontFamily: "Playfair Display, serif", color: colors.cream }}
-                    >
-                      {category.name}
-                    </h3>
-                  </div>
-                  
-                  <p
-                    className="text-sm mb-6"
-                    style={{ fontFamily: "Source Sans Pro, sans-serif", color: `${colors.cream}80` }}
+          <div className="grid md:grid-cols-2 gap-8">
+            {menuCategories.map((category) => (
+              <div
+                key={category.title}
+                className="p-8 lg:p-10 transition-all hover:shadow-xl group"
+                style={{ backgroundColor: colors.cream }}
+              >
+                <div className="flex items-start gap-6">
+                  <div
+                    className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 transition-colors group-hover:scale-110"
+                    style={{ backgroundColor: `${colors.terracotta}20` }}
                   >
-                    {category.description}
-                  </p>
-                  
-                  <ul className="space-y-2">
-                    {category.items.map((item, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="flex items-center gap-2 text-sm"
-                        style={{ color: colors.cream, fontFamily: "Source Sans Pro, sans-serif" }}
-                      >
-                        <span style={{ color: colors.terracotta }}>•</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                    <category.icon className="w-8 h-8" style={{ color: colors.terracotta }} />
+                  </div>
+                  <div className="flex-1">
+                    <h3
+                      className="text-2xl font-bold mb-3"
+                      style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+                    >
+                      {category.title}
+                    </h3>
+                    <p
+                      className="mb-6"
+                      style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
+                    >
+                      {category.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {category.items.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-center gap-2 text-sm"
+                          style={{ color: colors.forestGreen, fontFamily: 'Source Sans Pro, sans-serif' }}
+                        >
+                          <span
+                            className="w-1.5 h-1.5 rounded-full"
+                            style={{ backgroundColor: colors.terracotta }}
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
           <div className="text-center mt-12">
-            <a
-              href="#booking"
-              className="inline-flex items-center gap-3 px-10 py-4 text-lg tracking-wider transition-all hover:scale-105"
-              style={{
-                backgroundColor: colors.terracotta,
-                color: colors.cream,
-                fontFamily: "Source Sans Pro, sans-serif",
-              }}
+            <p
+              className="text-sm mb-4"
+              style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              <Calendar className="w-5 h-5" />
-              Reservar y Degustar
-            </a>
+              Precios disponibles en restaurante. Carta sujeta a disponibilidad de ingredientes de temporada.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section id="specials" className="py-24 lg:py-32" style={{ backgroundColor: colors.cream }}>
+      <section id="specialties" className="py-24 lg:py-32" style={{ backgroundColor: colors.cream }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
-            <div>
-              <span
-                className="text-sm tracking-[0.2em] uppercase"
-                style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
-              >
-                Recomendaciones del Chef
-              </span>
-              
-              <h2
-                className="text-4xl lg:text-5xl font-bold mt-4"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
-              >
-                Platos Destacados
-              </h2>
-            </div>
-            
-            <p
-              className="text-lg max-w-md mt-4 lg:mt-0"
-              style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
+          <div className="text-center mb-16">
+            <span
+              className="text-sm tracking-widest mb-4 block"
+              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              Los favoritos de nuestros clientes y las joyas de nuestra carta que no puedes dejar de probar.
+              IMPRESCINDIBLES
+            </span>
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+            >
+              Especialidades de la Casa
+            </h2>
+            <p
+              className="text-xl max-w-2xl mx-auto"
+              style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              Los platos que nuestros clientes piden una y otra vez
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {featuredDishes.map((dish, index) => (
               <div
-                key={index}
-                className="group relative overflow-hidden"
-                style={{ backgroundColor: `${colors.darkBrown}08` }}
+                key={dish.name}
+                className={`group ${index === 1 ? 'lg:-mt-8' : ''}`}
               >
-                <div className="flex flex-col lg:flex-row">
-                  {/* Image Placeholder */}
+                <div
+                  className="aspect-[3/4] relative overflow-hidden mb-6"
+                  style={{ background: dish.gradient }}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Utensils className="w-20 h-20 opacity-30" style={{ color: colors.cream }} />
+                  </div>
                   <div
-                    className="lg:w-2/5 aspect-square lg:aspect-auto flex items-center justify-center"
+                    className="absolute top-4 left-4 px-4 py-2 text-xs tracking-wider"
                     style={{
-                      background: `linear-gradient(135deg, ${colors.terracotta}40, ${colors.olive}30)`,
+                      backgroundColor: colors.cream,
+                      color: colors.forestGreen,
+                      fontFamily: 'Source Sans Pro, sans-serif'
                     }}
                   >
-                    <Utensils className="w-16 h-16" style={{ color: `${colors.cream}80` }} />
+                    {dish.tag}
                   </div>
-                  
-                  {/* Content */}
-                  <div className="lg:w-3/5 p-8">
-                    <span
-                      className="inline-block px-3 py-1 text-xs tracking-wider uppercase mb-4"
-                      style={{
-                        backgroundColor: colors.terracotta,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    >
-                      {dish.tag}
-                    </span>
-                    
-                    <h3
-                      className="text-2xl font-bold mb-4"
-                      style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
-                    >
-                      {dish.name}
-                    </h3>
-                    
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
-                    >
-                      {dish.description}
-                    </p>
-                  </div>
+                </div>
+                <h3
+                  className="text-2xl font-bold mb-3"
+                  style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+                >
+                  {dish.name}
+                </h3>
+                <p
+                  className="leading-relaxed"
+                  style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
+                >
+                  {dish.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-16">
+            <a
+              href="#booking"
+              className="inline-flex items-center gap-3 px-10 py-5 text-lg font-semibold transition-all hover:scale-105"
+              style={{
+                backgroundColor: colors.forestGreen,
+                color: colors.cream,
+                fontFamily: 'Source Sans Pro, sans-serif'
+              }}
+            >
+              Reserva y pruébalos
+              <ChevronRight className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Masonry */}
+      <section id="gallery" className="py-24 lg:py-32" style={{ backgroundColor: colors.forestGreen }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span
+              className="text-sm tracking-widest mb-4 block"
+              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              NUESTRA ESENCIA
+            </span>
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
+            >
+              Galería
+            </h2>
+            <p
+              className="text-xl max-w-2xl mx-auto"
+              style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              Imágenes que capturan el alma de nuestra trattoria
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryItems.map((item, index) => (
+              <div
+                key={index}
+                className={`relative overflow-hidden group cursor-pointer ${
+                  index === 0 || index === 3 ? 'row-span-2' : ''
+                }`}
+                style={{
+                  background: item.gradient,
+                  aspectRatio: index === 0 || index === 3 ? '1/1.5' : '1/1'
+                }}
+              >
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                  <span
+                    className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center px-4 font-medium"
+                    style={{ fontFamily: 'Source Sans Pro, sans-serif' }}
+                  >
+                    {item.label}
+                  </span>
                 </div>
               </div>
             ))}
@@ -660,536 +676,362 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Gallery Masonry */}
-      <section id="gallery" className="py-24 lg:py-32" style={{ backgroundColor: `${colors.taupe}15` }}>
+      {/* Process Steps */}
+      <section className="py-24 lg:py-32" style={{ backgroundColor: colors.warmGray }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center mb-16">
             <span
-              className="text-sm tracking-[0.2em] uppercase"
-              style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
+              className="text-sm tracking-widest mb-4 block"
+              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
             >
-              Galería
+              NUESTRO PROCESO
             </span>
-            
             <h2
-              className="text-4xl lg:text-5xl font-bold mt-4 mb-6"
-              style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
             >
-              Momentos en Trattoria Napoli
+              Del Campo a tu Mesa
             </h2>
-            
-            <p
-              className="text-lg"
-              style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
-            >
-              Un vistazo a nuestra cocina, nuestros platos y el ambiente que nos hace únicos.
-            </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryItems.map((item, index) => {
-              const aspectClass =
-                item.aspect === "tall"
-                  ? "row-span-2"
-                  : item.aspect === "wide"
-                  ? "col-span-2"
-                  : "";
-              
-              return (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step) => (
+              <div key={step.number} className="text-center group">
                 <div
-                  key={index}
-                  className={`${aspectClass} group relative overflow-hidden cursor-pointer`}
+                  className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-bold transition-transform duration-300 group-hover:scale-110"
                   style={{
-                    background: `linear-gradient(${45 + index * 20}deg, ${colors.terracotta}${30 + index * 5}, ${colors.olive}${20 + index * 3})`,
-                    minHeight: item.aspect === "tall" ? "400px" : "200px",
+                    backgroundColor: colors.cream,
+                    color: colors.terracotta,
+                    fontFamily: 'Playfair Display, serif'
                   }}
                 >
-                  <div className="absolute inset-0 flex items-center justify-center p-4">
-                    <p
-                      className="text-center text-sm"
-                      style={{ fontFamily: "Playfair Display, serif", color: `${colors.cream}90` }}
-                    >
-                      {item.title}
-                    </p>
-                  </div>
-
-                  <div
-                    className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300"
-                  />
+                  {step.number}
                 </div>
-              );
-            })}
+                <h3
+                  className="text-xl font-bold mb-3"
+                  style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
+                >
+                  {step.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
       <section className="py-24 lg:py-32" style={{ backgroundColor: colors.cream }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span
-              className="text-sm tracking-[0.2em] uppercase"
-              style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
-            >
-              Opiniones
-            </span>
-
-            <h2
-              className="text-4xl lg:text-5xl font-bold mt-4"
-              style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
-            >
-              Lo Que Dicen Nuestros Clientes
-            </h2>
-          </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span
+            className="text-sm tracking-widest mb-4 block"
+            style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+          >
+            TESTIMONIOS
+          </span>
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16"
+            style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+          >
+            Lo Que Dicen Nuestros Clientes
+          </h2>
 
           <div className="relative">
-            <div
-              className="p-8 lg:p-12 text-center"
-              style={{ backgroundColor: `${colors.darkBrown}08` }}
-            >
+            <div className="mb-8">
               <div className="flex justify-center gap-1 mb-6">
                 {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" style={{ color: colors.terracotta }} />
                 ))}
               </div>
-
               <p
-                className="text-xl lg:text-2xl italic mb-8 leading-relaxed"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
+                className="text-xl md:text-2xl italic mb-6 leading-relaxed"
+                style={{ color: colors.forestGreen, fontFamily: 'Playfair Display, serif' }}
               >
-                "{testimonials[currentTestimonial].text}"
+                &quot;{testimonials[currentTestimonial].text}&quot;
               </p>
-
               <p
-                className="text-sm tracking-wider uppercase"
-                style={{ color: colors.taupe, fontFamily: "Source Sans Pro, sans-serif" }}
+                className="text-sm tracking-wide"
+                style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
                 — {testimonials[currentTestimonial].author}
               </p>
             </div>
 
-            <div className="flex justify-center gap-4 mt-8">
+            <div className="flex justify-center gap-4">
               <button
-                onClick={prevTestimonial}
-                className="p-3 transition-all hover:scale-110"
-                style={{ backgroundColor: colors.terracotta }}
-                aria-label="Previous testimonial"
+                onClick={() => setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
+                className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300 hover:opacity-80"
+                style={{ backgroundColor: colors.forestGreen, color: colors.cream }}
               >
-                <ChevronLeft className="w-5 h-5" style={{ color: colors.cream }} />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
-                onClick={nextTestimonial}
-                className="p-3 transition-all hover:scale-110"
-                style={{ backgroundColor: colors.terracotta }}
-                aria-label="Next testimonial"
+                onClick={() => setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
+                className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300 hover:opacity-80"
+                style={{ backgroundColor: colors.forestGreen, color: colors.cream }}
               >
-                <ChevronRight className="w-5 h-5" style={{ color: colors.cream }} />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Booking Form */}
-      <section id="booking" className="py-24 lg:py-32" style={{ backgroundColor: colors.darkBrown }}>
+      {/* Booking Section */}
+      <section id="booking" className="py-24 lg:py-32" style={{ backgroundColor: colors.forestGreen }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <span
-                className="text-sm tracking-[0.2em] uppercase"
-                style={{ color: colors.terracotta, fontFamily: "Source Sans Pro, sans-serif" }}
+                className="text-sm tracking-widest mb-4 block"
+                style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
-                Reservaciones
+                RESERVAS
               </span>
-
               <h2
-                className="text-4xl lg:text-5xl font-bold mt-4 mb-6"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.cream }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
               >
                 Reserve Su Mesa
               </h2>
-
               <p
-                className="text-lg mb-8"
-                style={{ fontFamily: "Source Sans Pro, sans-serif", color: `${colors.cream}99` }}
+                className="text-lg mb-8 leading-relaxed"
+                style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}
               >
-                Le recomendamos reservar con antelación, especialmente para fines de semana
-                y fechas especiales. Estaremos encantados de recibirle.
+                Le invitamos a vivir una experiencia gastronómica inolvidable. Para grupos de más de 8 personas o eventos especiales, contáctenos directamente.
               </p>
-
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 flex items-center justify-center"
-                    style={{ backgroundColor: `${colors.terracotta}30` }}
-                  >
-                    <Phone className="w-5 h-5" style={{ color: colors.terracotta }} />
-                  </div>
-                  <div>
-                    <p className="text-sm" style={{ color: `${colors.cream}80` }}>Teléfono</p>
-                    <p style={{ color: colors.cream, fontFamily: "Source Sans Pro, sans-serif" }}>
-                      +34 91 123 4567
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 flex items-center justify-center"
-                    style={{ backgroundColor: `${colors.terracotta}30` }}
-                  >
-                    <Clock className="w-5 h-5" style={{ color: colors.terracotta }} />
-                  </div>
-                  <div>
-                    <p className="text-sm" style={{ color: `${colors.cream}80` }}>Horario</p>
-                    <p style={{ color: colors.cream, fontFamily: "Source Sans Pro, sans-serif" }}>
-                      Mar-Dom: 13:00-16:00 / 20:00-23:30
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 flex items-center justify-center"
-                    style={{ backgroundColor: `${colors.terracotta}30` }}
-                  >
-                    <MapPin className="w-5 h-5" style={{ color: colors.terracotta }} />
-                  </div>
-                  <div>
-                    <p className="text-sm" style={{ color: `${colors.cream}80` }}>Dirección</p>
-                    <p style={{ color: colors.cream, fontFamily: "Source Sans Pro, sans-serif" }}>
-                      Calle Mayor 42, Madrid
-                    </p>
-                  </div>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="tel:+34912345678"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium transition-all duration-300 hover:scale-105"
+                  style={{
+                    backgroundColor: colors.terracotta,
+                    color: colors.cream,
+                    fontFamily: 'Source Sans Pro, sans-serif'
+                  }}
+                >
+                  <Phone className="w-5 h-5" />
+                  Llamar Ahora
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium transition-all duration-300 border-2 hover:bg-cream/10"
+                  style={{
+                    borderColor: colors.cream,
+                    color: colors.cream,
+                    fontFamily: 'Source Sans Pro, sans-serif'
+                  }}
+                >
+                  <Calendar className="w-5 h-5" />
+                  Más Información
+                </a>
               </div>
             </div>
 
             <div
-              className="p-8 lg:p-10"
-              style={{ backgroundColor: `${colors.cream}08` }}
+              className="p-8 rounded-2xl"
+              style={{ backgroundColor: colors.cream }}
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      className="block text-sm mb-2"
-                      style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleFormChange}
-                      required
-                      className="w-full px-4 py-3 border-0 outline-none"
-                      style={{
-                        backgroundColor: `${colors.cream}10`,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm mb-2"
-                      style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleFormChange}
-                      required
-                      className="w-full px-4 py-3 border-0 outline-none"
-                      style={{
-                        backgroundColor: `${colors.cream}10`,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    />
-                  </div>
+              <h3
+                className="text-2xl font-bold mb-6"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+              >
+                Horarios de Apertura
+              </h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center pb-4 border-b" style={{ borderColor: colors.warmGray }}>
+                  <span style={{ color: colors.forestGreen, fontFamily: 'Source Sans Pro, sans-serif' }}>Martes - Viernes</span>
+                  <span style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}>13:00 - 16:00 | 20:00 - 23:30</span>
                 </div>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      className="block text-sm mb-2"
-                      style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      Teléfono
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleFormChange}
-                      required
-                      className="w-full px-4 py-3 border-0 outline-none"
-                      style={{
-                        backgroundColor: `${colors.cream}10`,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm mb-2"
-                      style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      Comensales
-                    </label>
-                    <select
-                      name="guests"
-                      value={formData.guests}
-                      onChange={handleFormChange}
-                      className="w-full px-4 py-3 border-0 outline-none"
-                      style={{
-                        backgroundColor: `${colors.cream}10`,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    >
-                      {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                        <option key={num} value={num} style={{ backgroundColor: colors.darkBrown }}>
-                          {num} {num === 1 ? "persona" : "personas"}
-                        </option>
-                      ))}
-                      <option value="9+" style={{ backgroundColor: colors.darkBrown }}>9+ personas</option>
-                    </select>
-                  </div>
+                <div className="flex justify-between items-center pb-4 border-b" style={{ borderColor: colors.warmGray }}>
+                  <span style={{ color: colors.forestGreen, fontFamily: 'Source Sans Pro, sans-serif' }}>Sábados</span>
+                  <span style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}>13:00 - 16:30 | 20:00 - 00:00</span>
                 </div>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      className="block text-sm mb-2"
-                      style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      Fecha
-                    </label>
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleFormChange}
-                      required
-                      className="w-full px-4 py-3 border-0 outline-none"
-                      style={{
-                        backgroundColor: `${colors.cream}10`,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm mb-2"
-                      style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                    >
-                      Hora
-                    </label>
-                    <select
-                      name="time"
-                      value={formData.time}
-                      onChange={handleFormChange}
-                      required
-                      className="w-full px-4 py-3 border-0 outline-none"
-                      style={{
-                        backgroundColor: `${colors.cream}10`,
-                        color: colors.cream,
-                        fontFamily: "Source Sans Pro, sans-serif",
-                      }}
-                    >
-                      <option value="" style={{ backgroundColor: colors.darkBrown }}>Seleccione hora</option>
-                      {["13:00", "13:30", "14:00", "14:30", "15:00", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"].map((time) => (
-                        <option key={time} value={time} style={{ backgroundColor: colors.darkBrown }}>
-                          {time}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                <div className="flex justify-between items-center pb-4 border-b" style={{ borderColor: colors.warmGray }}>
+                  <span style={{ color: colors.forestGreen, fontFamily: 'Source Sans Pro, sans-serif' }}>Domingos</span>
+                  <span style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}>13:00 - 17:00</span>
                 </div>
-
-                <div>
-                  <label
-                    className="block text-sm mb-2"
-                    style={{ color: `${colors.cream}80`, fontFamily: "Source Sans Pro, sans-serif" }}
-                  >
-                    Mensaje (opcional)
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleFormChange}
-                    rows={3}
-                    className="w-full px-4 py-3 border-0 outline-none resize-none"
-                    style={{
-                      backgroundColor: `${colors.cream}10`,
-                      color: colors.cream,
-                      fontFamily: "Source Sans Pro, sans-serif",
-                    }}
-                    placeholder="Alergias, ocasión especial, preferencias..."
-                  />
+                <div className="flex justify-between items-center">
+                  <span style={{ color: colors.forestGreen, fontFamily: 'Source Sans Pro, sans-serif' }}>Lunes</span>
+                  <span style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}>Cerrado</span>
                 </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 text-lg tracking-wider uppercase transition-all hover:scale-[1.02]"
-                  style={{
-                    backgroundColor: colors.terracotta,
-                    color: colors.cream,
-                    fontFamily: "Source Sans Pro, sans-serif",
-                  }}
-                >
-                  Solicitar Reserva
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact / Footer */}
-      <footer id="contact" className="py-16" style={{ backgroundColor: colors.cream }}>
+      {/* Contact Section */}
+      <section id="contact" className="py-24 lg:py-32" style={{ backgroundColor: colors.warmGray }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: colors.terracotta }}
-                >
-                  <ChefHat className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
-                  >
-                    Trattoria Napoli
-                  </h3>
-                  <p className="text-xs uppercase tracking-widest" style={{ color: colors.taupe }}>
-                    Dal 1987
-                  </p>
-                </div>
-              </div>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
+          <div className="text-center mb-16">
+            <span
+              className="text-sm tracking-widest mb-4 block"
+              style={{ color: colors.terracotta, fontFamily: 'Source Sans Pro, sans-serif' }}
+            >
+              CONTACTO
+            </span>
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+            >
+              Visítenos
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-8 rounded-2xl" style={{ backgroundColor: colors.cream }}>
+              <div
+                className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+                style={{ backgroundColor: colors.forestGreen }}
               >
-                Tradición italiana en cada plato. Tres generaciones dedicadas a compartir
-                los auténticos sabores de nuestra tierra.
+                <MapPin className="w-7 h-7" style={{ color: colors.cream }} />
+              </div>
+              <h3
+                className="text-xl font-bold mb-3"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+              >
+                Dirección
+              </h3>
+              <p style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                Calle Mayor 123<br />
+                28013 Madrid, España
               </p>
+            </div>
+
+            <div className="text-center p-8 rounded-2xl" style={{ backgroundColor: colors.cream }}>
+              <div
+                className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+                style={{ backgroundColor: colors.forestGreen }}
+              >
+                <Phone className="w-7 h-7" style={{ color: colors.cream }} />
+              </div>
+              <h3
+                className="text-xl font-bold mb-3"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+              >
+                Teléfono
+              </h3>
+              <p style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                +34 912 345 678<br />
+                Reservas y consultas
+              </p>
+            </div>
+
+            <div className="text-center p-8 rounded-2xl" style={{ backgroundColor: colors.cream }}>
+              <div
+                className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+                style={{ backgroundColor: colors.forestGreen }}
+              >
+                <Mail className="w-7 h-7" style={{ color: colors.cream }} />
+              </div>
+              <h3
+                className="text-xl font-bold mb-3"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.forestGreen }}
+              >
+                Email
+              </h3>
+              <p style={{ color: colors.brownOlive, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                info@trattorianapoli.es<br />
+                reservas@trattorianapoli.es
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: colors.forestGreen }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid md:grid-cols-4 gap-12">
+            <div className="md:col-span-2">
+              <h3
+                className="text-3xl font-bold mb-4"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
+              >
+                Trattoria Napoli
+              </h3>
+              <p
+                className="mb-6 max-w-md"
+                style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}
+              >
+                Desde 1987, llevamos la auténtica cocina italiana a su mesa. Una historia familiar de pasión, tradición y sabor que continúa escribiéndose cada día.
+              </p>
+              <div className="flex items-center gap-2">
+                <Heart className="w-5 h-5" style={{ color: colors.terracotta }} />
+                <span style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                  Hecho con amor en Madrid
+                </span>
+              </div>
             </div>
 
             <div>
               <h4
-                className="text-lg font-bold mb-6"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
+                className="text-lg font-bold mb-4"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
+              >
+                Enlaces
+              </h4>
+              <ul className="space-y-3">
+                {navLinks.slice(0, 4).map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="transition-colors duration-300 hover:opacity-80"
+                      style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4
+                className="text-lg font-bold mb-4"
+                style={{ fontFamily: 'Playfair Display, serif', color: colors.cream }}
               >
                 Contacto
               </h4>
-              <div className="space-y-4">
-                <a
-                  href="tel:+34911234567"
-                  className="flex items-center gap-3 text-sm hover:opacity-70 transition-opacity"
-                  style={{ color: colors.taupe, fontFamily: "Source Sans Pro, sans-serif" }}
-                >
+              <ul className="space-y-3">
+                <li className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" style={{ color: colors.terracotta }} />
+                  <span style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                    Mar-Dom: 13:00 - 23:30
+                  </span>
+                </li>
+                <li className="flex items-center gap-2">
                   <Phone className="w-4 h-4" style={{ color: colors.terracotta }} />
-                  +34 91 123 4567
-                </a>
-                <a
-                  href="mailto:info@trattorianapoli.es"
-                  className="flex items-center gap-3 text-sm hover:opacity-70 transition-opacity"
-                  style={{ color: colors.taupe, fontFamily: "Source Sans Pro, sans-serif" }}
-                >
-                  <Mail className="w-4 h-4" style={{ color: colors.terracotta }} />
-                  info@trattorianapoli.es
-                </a>
-                <div
-                  className="flex items-center gap-3 text-sm"
-                  style={{ color: colors.taupe, fontFamily: "Source Sans Pro, sans-serif" }}
-                >
+                  <span style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                    +34 912 345 678
+                  </span>
+                </li>
+                <li className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" style={{ color: colors.terracotta }} />
-                  Calle Mayor 42, Madrid
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4
-                className="text-lg font-bold mb-6"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
-              >
-                Horario
-              </h4>
-              <div
-                className="space-y-2 text-sm"
-                style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
-              >
-                <p>Lunes: Cerrado</p>
-                <p>Martes - Viernes: 13:00 - 16:00</p>
-                <p className="pl-[104px]">20:00 - 23:30</p>
-                <p>Sábado - Domingo: 13:00 - 16:30</p>
-                <p className="pl-[104px]">20:00 - 00:00</p>
-              </div>
-            </div>
-
-            <div>
-              <h4
-                className="text-lg font-bold mb-6"
-                style={{ fontFamily: "Playfair Display, serif", color: colors.darkBrown }}
-              >
-                Síguenos
-              </h4>
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center transition-all hover:scale-110"
-                  style={{ backgroundColor: colors.terracotta }}
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-5 h-5" style={{ color: colors.cream }} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center transition-all hover:scale-110"
-                  style={{ backgroundColor: colors.terracotta }}
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-5 h-5" style={{ color: colors.cream }} />
-                </a>
-              </div>
-              <p
-                className="mt-6 text-sm"
-                style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
-              >
-                Comparte tu experiencia con
-                <br />
-                <span style={{ color: colors.terracotta }}>#TrattoriaNapoli</span>
-              </p>
+                  <span style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}>
+                    Calle Mayor 123, Madrid
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
 
           <div
-            className="pt-8 border-t text-center"
-            style={{ borderColor: `${colors.taupe}30` }}
+            className="mt-12 pt-8 border-t text-center"
+            style={{ borderColor: colors.brownOlive }}
           >
-            <p
-              className="text-sm"
-              style={{ fontFamily: "Source Sans Pro, sans-serif", color: colors.taupe }}
-            >
-              © {new Date().getFullYear()} Trattoria Napoli. Todos los derechos reservados.
+            <p style={{ color: colors.warmGray, fontFamily: 'Source Sans Pro, sans-serif' }}>
+              © 2024 Trattoria Napoli. Todos los derechos reservados.
             </p>
           </div>
         </div>
       </footer>
     </main>
-  );
+  )
 }

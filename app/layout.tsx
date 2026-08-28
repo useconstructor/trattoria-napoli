@@ -3,13 +3,13 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Trattoria Napoli',
-  description: 'A traditional family-owned Italian restaurant established in 1987, specializing in fresh handmade pasta and authentic Neapolitan pizza with a warm, inviting atmosphere.',
+  description: 'A traditional family-owned Italian restaurant established in 1987, specializing in fresh handmade pasta and authentic Neapolitan pizza with a warm, nostalgic atmosphere.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-white text-gray-900" style={{ backgroundColor: '#C4613A' }}>
+      <body className="min-h-screen bg-white text-gray-900" style={{ backgroundColor: '#F5EDE4' }}>
         {children}
       </body>
     </html>
